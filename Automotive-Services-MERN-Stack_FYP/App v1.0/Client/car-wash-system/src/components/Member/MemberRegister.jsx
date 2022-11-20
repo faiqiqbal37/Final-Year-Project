@@ -5,26 +5,25 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import AuthService from "../../services/customer/authentication/auth_service";
+import AuthService from "../../services/member/auth_service";
+
+
 
 function Register(props) {
   const { handleSubmit, register, errors } = useForm({
     mode: "onBlur",
   });
   const onSubmit = (values) => {
-    AuthService.register(
-      values.firstname,
-      values.lastname,
-      values.email,
-      values.password
-    ).then((respone) => {
-      props.history.push("/login");
-    });
+    AuthService.register(values.firstname, values.lastname, values.email, values.password, values.mobile).then(
+      (respone) => {
+        props.history.push("/member_login");
+      }
+    );
   };
   return (
     <Container maxWidth="xs">
       <div className="login__form">
-        <h1>CUSTOMER REGISTER</h1>
+        <h1>SERVICE PROVIDER REGISTER</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
             variant="outlined"
@@ -38,7 +37,7 @@ function Register(props) {
               required: "First Name is Required",
             })}
           />
-          {errors.name && <span className="span">{errors.name.message}</span>}
+          {errors.firstname && <span className="span">{errors.name.message}</span>}
           <TextField
             variant="outlined"
             margin="normal"
@@ -51,7 +50,20 @@ function Register(props) {
               required: "Last Name is Required",
             })}
           />
-          {errors.name && <span className="span">{errors.name.message}</span>}
+          {errors.lastname && <span className="span">{errors.lastname.message}</span>}
+          <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            label="Phone Number"
+            placeholder="Enter Your Phone Number"
+            type="mobile"
+            name="mobile"
+            inputRef={register({
+              required: "Phone Number is Required",
+            })}
+          />
+          {errors.mobile && <span className="span">{errors.mobile.message}</span>}
           <TextField
             variant="outlined"
             margin="normal"

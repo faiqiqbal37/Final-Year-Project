@@ -53,7 +53,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.register = (req, res, next) => {
-  if (!req.body.name || !req.body.email || !req.body.password) {
+  if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.mobile) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -73,8 +73,8 @@ exports.register = (req, res, next) => {
           } else {
             const member = new Member({
               _id: new mongoose.Types.ObjectId(),
-              name: req.body.name,
-              email: req.body.email,
+              firstname: req.body.firstname,
+              lastname: req.body.lastname,
               password: hash,
               mobile: req.body.mobile,
             });

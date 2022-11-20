@@ -7,6 +7,7 @@ import Register from "./Register";
 import Member_Login from "../Member/Member_Login";
 import Contact from "./Contact";
 import Working from "./Working";
+import MemberRegister from "../../components/Member/MemberRegister"
 
 
 function Home() {
@@ -20,6 +21,7 @@ function Home() {
         <Route exact path="/contact" component={Contact} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/member_register" component={MemberRegister} />
         <Route path="/member_login" component={Member_Login} />
       </Switch>
       

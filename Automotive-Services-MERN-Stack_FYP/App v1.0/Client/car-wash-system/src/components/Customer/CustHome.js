@@ -5,6 +5,7 @@ import Brands from "./Brands";
 function Demo(props) {
   return (
     <div>
+      
       <CarouselComponent />
       <Brands />
     </div>
