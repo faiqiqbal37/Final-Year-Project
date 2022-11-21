@@ -1,4 +1,5 @@
 const Member = require("../model/memberModel");
+const Mechanic = require("../../Mechanic/model/memberModel")
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
@@ -77,6 +78,54 @@ exports.register = (req, res, next) => {
               lastname: req.body.lastname,
               password: hash,
               mobile: req.body.mobile,
+              email: req.body.email
+            });
+            member
+              .save()
+              .then((result) => {
+                console.log(result);
+                res.status(201).json({
+                  message: "Registered Successfully",
+                  user: result,
+                });
+              })
+              .catch((err) => {
+                console.log("Registration Error" + err);
+                res.status(500).json({
+                  Registartion_Error: err,
+                });
+              });
+          }
+        });
+      }
+    });
+};
+
+exports.registerMechanic = (req, res, next) => {
+  if (!req.body.name || !req.body.email || !req.body.password || !req.body.mobile) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  Mechanic.find({ email: req.body.email })
+    .exec()
+    .then((user) => {
+      if (user.length >= 1) {
+        return res.status(409).json({
+          message: "Member Already Exist",
+        });
+      } else {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          if (err) {
+            return res.status(500).json({
+              error: err,
+            });
+          } else {
+            const member = new Mechanic({
+              _id: new mongoose.Types.ObjectId(),
+              name: req.body.name,
+              password: hash,
+              mobile: req.body.mobile,
+              email: req.body.email
             });
             member
               .save()

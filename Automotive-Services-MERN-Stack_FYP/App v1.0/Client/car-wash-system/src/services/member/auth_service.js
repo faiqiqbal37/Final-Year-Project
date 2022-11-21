@@ -35,7 +35,7 @@ class AuthService {
   registerMechanic(name, email, password, mobile) {
     return axios
       .post(
-        AUTH_URL + "register",
+        AUTH_URL + "registerMechanic",
         { name, email, password, mobile },
         {
           headers: authHeader(),

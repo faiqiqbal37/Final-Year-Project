@@ -21,6 +21,12 @@ function AdminNav() {
     AuthService.logout();
   };
 
+  const getAdmin = () => {
+    let data;
+    AuthService.getAdmin().then((res) => data = res.data)
+    return data;
+  }
+
   return (
     <nav className={`nav ${show && "nav__scroll"}`}>
       <a href="/admin_home">
@@ -39,7 +45,7 @@ function AdminNav() {
           className={`nav__link ${show && "nav__linkscroll"}`}
           to="/admin_home"
         >
-          MOHIT MUROTIYA
+          Service Provider
         </NavLink>
         <NavLink
           onClick={logout}

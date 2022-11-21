@@ -9,6 +9,16 @@ import "mdbreact/dist/css/mdb.css";
 import "fontsource-roboto";
 import { BrowserRouter as Router } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+
+
+Sentry.init({
+  dsn: "https://a680520d13d94cc2841a1fc5de3a4512@o4504142230716416.ingest.sentry.io/4504142232551424", //paste copied DSN value here
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1.0, //lower the value in production
+});
+
 
 ReactDOM.render(
   <Router>

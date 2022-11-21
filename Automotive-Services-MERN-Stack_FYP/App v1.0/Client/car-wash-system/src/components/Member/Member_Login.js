@@ -17,7 +17,7 @@ export default function Member_Login(props) {
   const onSubmit = (values) => {
     AurhService.login(values.email, values.password).then((respone) => {
       if (respone.role === "ADMIN") {
-        props.history.push("/admin_home");
+        props.history.push("/admin_home").then(window.location.reload());
       } else {
         props.history.push("/mechanic_home");
       }

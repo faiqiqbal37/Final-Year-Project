@@ -11,13 +11,19 @@ import AuthService from "../../../services/member/auth_service";
 function Admin(props) {
   useEffect(() => {
     const admin = AuthService.getAdmin();
+
     if (admin === null) {
       props.history.push("/login");
     }
   }, []);
   return (
+
+  
     <div>
+
+  
       <AdminNav />
+      
       <AdminHome />
       <Switch>
         {/* <Route exact path="/admin_home" component={AdminHome} /> */}
