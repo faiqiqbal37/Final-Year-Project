@@ -64,16 +64,16 @@ function AdminHome(props) {
       });
   };
 
-  useEffect(() => {
-    getCompletedOrders();
-  }, []);
+  // useEffect(() => {
+  //   getCompletedOrders();
+  // }, []);
 
   return (
     <div className="admin_home">
       <hr />
       <h1>WELCOME ADMIN</h1>
       <h1>
-        Your Total Earnings: &#8377;
+        Your Total Earnings: PKR
         {orders
           .map((order) => order.servicePrice)
           .reduce((prev, next) => prev + next, 0)}

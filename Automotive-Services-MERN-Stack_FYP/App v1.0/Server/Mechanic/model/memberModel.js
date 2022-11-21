@@ -15,9 +15,10 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   role: {
     type: String,
+    default: "MECHANIC"
   },
   mobile: { type: String },
-  status: { type: String },
+  status: { type: String, default: "AVAILABLE" },
 });
 
 module.exports = mongoose.model("member", userSchema);

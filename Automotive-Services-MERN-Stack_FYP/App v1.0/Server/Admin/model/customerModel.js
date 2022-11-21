@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
 const customerSchema = mongoose.Schema({
-  name: {
+  firstname: {
+    type: String,
+    min: 4,
+    max: 20,
+  },
+  lastname: {
     type: String,
     min: 4,
     max: 20,
@@ -9,7 +14,8 @@ const customerSchema = mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+    match:
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
   },
   password: { type: String },
   role: {

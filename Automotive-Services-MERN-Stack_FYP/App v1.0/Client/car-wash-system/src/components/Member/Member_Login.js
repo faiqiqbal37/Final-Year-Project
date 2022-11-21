@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "react-bootstrap/Button";
 import Container from "@material-ui/core/Container";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import AurhService from "../../services/member/auth_service";
 import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -16,7 +17,7 @@ export default function Member_Login(props) {
   const onSubmit = (values) => {
     AurhService.login(values.email, values.password).then((respone) => {
       if (respone.role === "ADMIN") {
-        props.history.push("/admin_home");
+        props.history.push("/admin_home").then(window.location.reload());
       } else {
         props.history.push("/mechanic_home");
       }
@@ -25,6 +26,7 @@ export default function Member_Login(props) {
   return (
     <Container maxWidth="xs">
       <div className="login__form">
+        <h1>Member Login</h1>
         <Avatar>
           <LockOutlinedIcon />
         </Avatar>
@@ -65,6 +67,9 @@ export default function Member_Login(props) {
           <Button className="login__button" type="submit" block color="primary">
             Sign In
           </Button>
+          <Link className="link" to="/member_register">
+            {"Don't have an account? Sign Up"}
+          </Link>
         </form>
       </div>
     </Container>

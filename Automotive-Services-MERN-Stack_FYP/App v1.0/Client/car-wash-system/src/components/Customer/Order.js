@@ -64,7 +64,7 @@ function Order(props) {
         enqueueSnackbar(response, {
           variant: "success",
         });
-      })
+      }).then(props.history.push("/cust_home").then(window.location.reload()))
       .catch((err) => {
         console.log(err);
       });

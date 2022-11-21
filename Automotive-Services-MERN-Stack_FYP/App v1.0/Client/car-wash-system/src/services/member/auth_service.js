@@ -1,9 +1,13 @@
 import axios from "axios";
 import authHeader from "../member/auth_header";
 
-const AUTH_URL = "http://localhost:8010/admin/auth/";
+const AUTH_URL = "http://localhost:8088/admin/auth/";
 
 class AuthService {
+  constructor() {
+    this.authenticated = false;
+  }
+
   login(email, password) {
     return axios
       .post(AUTH_URL + "login", { email, password })
@@ -11,9 +15,12 @@ class AuthService {
         if (response.data.token) {
           if (response.data.role === "ADMIN") {
             console.log(response.data.name);
+            this.authenticated = true;
             localStorage.setItem("admin", JSON.stringify(response.data));
-          } else {
+          }
+          if (response.data.role === "MECHANIC") {
             console.log(response.data.name);
+            this.authenticated = true;
             localStorage.setItem("mechanic", JSON.stringify(response.data));
           }
         }
@@ -28,7 +35,7 @@ class AuthService {
   registerMechanic(name, email, password, mobile) {
     return axios
       .post(
-        AUTH_URL + "register",
+        AUTH_URL + "registerMechanic",
         { name, email, password, mobile },
         {
           headers: authHeader(),
@@ -52,11 +59,14 @@ class AuthService {
     console.log("Inside Logout Method");
   }
 
-  register(name, email, password) {
+  register(firstname, lastname, email, password, mobile) {
+    const role  = "ADMIN";
     return axios.post(AUTH_URL + "register", {
-      name,
+      firstname,
+      lastname,
       email,
       password,
+      mobile,
     });
   }
 

@@ -20,12 +20,16 @@ export default function Login(props) {
   const onSubmit = (values) => {
     AuthService.login(values.email, values.password).then((response) => {
       console.log(response);
-      props.history.push("/cust_home");
-    });
+      
+      props.history.push("/cust_home").then(window.location.reload());
+    })
+    
   };
   return (
     <Container maxWidth="xs">
+     
       <div className="login__form">
+      <h1> Customer Login</h1>
         <Avatar>
           <LockOutlinedIcon />
         </Avatar>

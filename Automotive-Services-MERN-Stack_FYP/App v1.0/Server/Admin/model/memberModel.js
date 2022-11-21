@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  name: {
+  firstname: {
+    type: String,
+    required: true,
+  },
+  lastname: {
     type: String,
     required: true,
   },
@@ -16,7 +20,7 @@ const userSchema = mongoose.Schema({
   mobile: { type: String },
   role: {
     type: String,
-    default: "MECHANIC",
+    default: 'admin',
   },
   status: { type: String, default: "AVAILABLE" },
 });
